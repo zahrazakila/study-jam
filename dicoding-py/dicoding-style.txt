@@ -1,0 +1,153 @@
+1. Lint (pengecekan kode atas kemungkinan terjadi error)
+
+a. Pycodestyle (pep8)
+pip  install pycodestyle
+
+b. Pylint
+pip install pylint
+
+c. Flake8
+pip install flake8
+
+2. memformat kode
+
+a. black (auto ganti)
+pip install black
+
+b. yapf(yet another pythton formatter)
+pip install yapf
+
+c. autopep8
+pip install autopep8
+
+STYLE GUIDE STATEMENT GABUNGAN
+
+Saat Anda membuat program dengan banyak statement, usahakan untuk 
+tidak menggabungkan >1 statement pada baris yang sama.
+
+Disarankan seperti ini.
+
+if foo == 'blah':
+    do_blah_thing()
+do_one()
+do_two()
+do_three()
+
+Tidak disarankan seperti ini.
+
+if foo == 'blah': do_blah_thing()
+for x in lst: total += x
+while t < 10: t = delay()
+
+PENGGUNAAN TRAILING COMMAS (koma dibagian akhir)
+
+Koma di bagian akhir (trailing commas) umumnya bersifat opsional, 
+satu statement yang bersifat wajib adalah saat kita membuat variabel 
+menggunakan tipe tuple dengan satu elemen. Hal ini umumnya diperjelas 
+dengan kurung untuk menghindari penghapusan atau pembersihan.
+
+Disarankan seperti ini.
+FILES = ('setup.cfg',)
+
+Tidak disarankan seperti ini.
+FILES = 'setup.cfg',
+
+Disarankan seperti ini
+FILES = [
+    'setup.cfg',
+    'tox.ini',
+    ]
+initialize(FILES,
+           error=True,
+           )
+
+Tidak disarankan seperti ini.
+FILES = ['setup.cfg', 'tox.ini',]
+initialize(FILES, error=True,)
+
+ANOTASI FUNGSI
+
+Penggunaan anotasi fungsi sebaiknya menggunakan aturan baku untuk titik
+dua (:) dan menggunakan spasi untuk penggunaan arah panah atau arrow (->).
+
+Yes:
+def munge(input: str):  # Menambahkan informasi parameter bertipe string
+    pass
+def munge() -> str:   # Menambahkan informasi return value bertipe string
+    pass
+ 
+No:
+def munge(input:str):  # Menambahkan informasi parameter bertipe string
+    pass
+def munge()->str:   # Menambahkan informasi return value bertipe string
+    pass
+
+Jika kita membuat fungsi yang menggabungkan anotasi dengan nilai parameter
+, sebaiknya tetap menggunakan spasi sebelum dan sesudah tanda sama dengan
+ (=). Namun, ketika membuat fungsi biasa tanpa adanya anotasi, sebaiknya 
+ tidak menggunakan spasi sebelum dan sesudah tanda sama dengan (=).
+
+Yes:
+def LuasPersegiPanjang(panjang:int = 2, lebar=None):
+    pass
+ 
+No:
+def LuasPersegiPanjang(panjang: int=2, lebar = None):
+    pass
+
+ Yes:
+def LuasPersegiPanjang(panjang=2, lebar=None):
+    luas = panjang*lebar
+    return luas
+ 
+No:
+def LuasPersegiPanjang(panjang = 2, lebar = None):
+    luas = panjang*lebar
+    return luas
+
+def LuasPersegiPanjang(panjang: int = 2, lebar: int = None):
+    luas = panjang*lebar
+    return luas
+
+luas_satu = LuasPersegiPanjang(lebar=2)
+print(luas_satu)
+
+STYLE GUIDE PRINSIP PENAMAAN
+
+1. Overriding
+
+Nama yang dilihat oleh user publik sebaiknya merefleksikan penggunaan
+/fungsinya dan bukan implementasinya. Misalnya nama fungsi berikut.
+Contoh : cariJalan() > jalan()
+
+2. Penamaan Deskriptif
+
+Satu karakter huruf kecil: b
+Satu karakter huruf besar: B
+Huruf kecil: hurufkecil
+Huruf kecil dengan pemisah kata garis bawah: huruf_kecil_dengan_pemisah_kata_garis_bawah
+Huruf Besar: HURUFBESAR
+Huruf Besar dengan pemisah garis bawah: HURUF_BESAR_DENGAN_PEMISAH_GARIS_BAWAH
+Huruf Besar di Awal Kata (CapWords, CamelCase): HurufBesarDiAwalKata 
+(pastikan semua singkatan/akronim dituliskan dengan huruf besar, misalnya HTTPServerError, bukan HttpServerError)
+Huruf Campuran: hurufCampuran (mirip dengan CapWords, hanya berbeda di karakter paling awal)
+Huruf Besar di Awal Kata dengan Garis Bawah: Huruf_Besar_Di_Awal_Kata_Dengan_Garis_Bawah
+Satu hal yang perlu diingat ketika Anda membuat sebuah fungsi, sangat tidak disarankan untuk menggunakan 
+frasa atau huruf sebagai awalan fungsi. Awalan fungsi mengacu pada nama fungsi di bagian awal, seperti 'get' pada "get_name()" atau 'konversi' pada "konversi_ke_integer()". 
+
+Python tidak menyarankan atau lebih tepatnya tidak dibutuhkan jika Anda 
+membuat sebuah fungsi yang diawali huruf atau frasa, seperti 'f' jika fungsinya 
+'f_mean()',  'r' jika fungsinya 'r_name()', dan sebagainya. Python memiliki prinsip yang berlaku dalam penamaan fungsi atau method sebagai berikut.
+
+Atribut dan method name bersifat pre-fixed dengan objek.
+Function name selalu diawali dengan module name.
+Selain penggunaan huruf atau frase yang tidak direkomendasikan, 
+berikut adalah beberapa bentuk penamaan khusus yang umum ditemukan 
+dalam penamaan fungsi. Ini juga bisa Anda terapkan pada penamaan variabel dan kelas.
+
+_diawali_sebuah_garis_bawah: penamaan ini dapat digunakan untuk penggunaan internal lemah yang merujuk pada penggunaannya dengan lingkup tertentu.
+diakhiri_sebuah_garis bawah_: penamaan ini digunakan untuk mengatasi redundan dengan keyword/reserved words di Python.
+__diawali_dua_garis bawah: menegaskan bahwa sebuah objek adalah bagian dari kelas tertentu.
+__diawali_dan_diakhiri_dua_garis bawah__: Objek atau atribut tertentu yang diciptakan Python untuk digunakan dalam program. Contohnya adalah  __init__, __import__ or __file__.
+
+Ingat, penamaan ini disebut juga sebagai dunder atau double underscore oleh programmer Python. Anda sangat tidak disarankan membuat penamaan menggunakan dunder. Misalnya Anda membuat penamaan "__special_method__", itu sangat tidak disarankan oleh Python karena bisa ada kemungkinan penamaan tersebut telah digunakan oleh Python dan secara tidak sengaja menimpa kode yang sudah ada. Terkecuali penamaan tersebut sudah terdokumentasikan oleh Python seperti '__init__' yang digunakan untuk membuat class constructor.
